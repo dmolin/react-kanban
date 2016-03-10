@@ -7,6 +7,10 @@ class NoteStore {
     this.bindActions(NoteActions);
 
     this.notes = [];
+
+    this.exportPublicMethods({
+      getNotesByIds: this.getNotesByIds.bind(this)
+    });
   }
   create(note) {
     const notes = this.notes;
@@ -19,6 +23,7 @@ class NoteStore {
     this.setState({
       notes: notes.concat(note)
     });
+    return note;
   }
   update(updatedNote) {
     //Note the use of map/assign to avoid changing the original object. neat!
@@ -37,6 +42,19 @@ class NoteStore {
     this.setState({
       notes: this.notes.filter(note => note.id !== id)
     });
+  }
+  deleteMulti(noteIds) {
+    this.setState({
+      notes: this.notes.filter(note => noteIds.indexOf(note.id) === -1)
+    });
+  }
+  getNotesByIds(ids) {
+    return (ids || [])
+      .map(id => this.notes.filter(note => note.id === id))
+      //now we have a result in the form:
+      //[[Note],[Note],[],[Note]...]
+      //filter out possible empty members and extract the note from each one
+      .filter(a => a.length).map(a => a[0]);
   }
 }
 

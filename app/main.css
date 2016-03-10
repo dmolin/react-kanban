@@ -26,11 +26,11 @@ body {
     box-shadow: 0 0 0.3em 0.03em rgba(0,0,0, 0.7);
 }
 
-.note .task {
+.note .value {
     display: inline-block;
 }
 
-.note .delete-note {
+.note .delete {
     float: right;
     __padding: 0.3em;
     cursor: pointer;
@@ -39,6 +39,6 @@ body {
     border: 1px solid #ccc;
 }
 
-.note:hover .delete-note {
+.note:hover .delete {
     visibility: visible;
 }
