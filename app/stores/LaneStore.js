@@ -83,6 +83,29 @@ class LaneStore {
 
     this.setState({lanes});
   }
+  moveLane({sourceId, targetId}) {
+
+    var lanes = [].concat(this.lanes);
+    const sourceLane = lanes.filter(lane => lane.id === sourceId)[0];
+    const targetLane = lanes.filter(lane => lane.id === targetId)[0];
+    const sourceLaneIndex = lanes.findIndex(lane => lane.id === sourceId);
+    const targetLaneIndex = lanes.findIndex(lane => lane.id === targetId);
+
+    console.log(`source: ${sourceLaneIndex}, target: ${targetLaneIndex}`);
+    if(sourceLaneIndex === -1 || targetLaneIndex === -1 ) return;
+
+    if(sourceLaneIndex !== targetLaneIndex) {
+      //move at once to avoid complications
+      lanes = update(lanes, {
+        $splice: [
+          [sourceLaneIndex, 1],
+          [targetLaneIndex, 0, sourceLane]
+        ]
+      });
+    }
+    this.setState({lanes});
+
+  }
 }
 
 export default alt.createStore(LaneStore, 'LaneStore');

@@ -5,8 +5,17 @@ import NoteActions from '../actions/NoteActions';
 import NoteStore from '../stores/NoteStore';
 import LaneActions from '../actions/LaneActions';
 import Editable from './Editable.jsx';
-import {DropTarget} from 'react-dnd';
+import {DragSource, DropTarget} from 'react-dnd';
 import ItemTypes from '../constants/itemTypes';
+
+const laneSource = {
+  beginDrag(props) {
+    return { id: props.id };
+  },
+  isDragging(props, monitor) {
+    return props.id === monitor.getItem().id;
+  }
+};
 
 const noteTarget = {
   hover(targetProps, monitor) {
@@ -22,15 +31,37 @@ const noteTarget = {
   }
 };
 
+const laneTarget = {
+  hover(targetProps, monitor) {
+    const sourceProps = monitor.getItem();
+    const sourceId = sourceProps.id;
+    const targetId = targetProps.id;
+
+    console.log("lane target", sourceId, targetId);
+
+    if(sourceId !== targetId) {
+      LaneActions.moveLane({sourceId, targetId});
+    }
+
+  }
+};
+
+@DragSource(ItemTypes.LANE, laneSource, (connect, monitor) => ({
+  connectDragSource: connect.dragSource(),isDragging: monitor.isDragging() }))
 @DropTarget(ItemTypes.NOTE, noteTarget, (connect) => ({
+  connectDropTarget: connect.dropTarget()
+}))
+@DropTarget(ItemTypes.LANE, laneTarget, (connect) => ({
   connectDropTarget: connect.dropTarget()
 }))
 export default class Lane extends React.Component {
   render() {
-    const {connectDropTarget, lane, ...props} = this.props;
+    const {connectDragSource, isDragging, connectDropTarget, lane, ...props} = this.props;
 
-    return connectDropTarget(
-      <div {...props}>
+    return connectDragSource(connectDropTarget(
+      <div
+        style={ {opacity: isDragging ? 0 : 1} }
+        {...props}>
         <div className="lane-content">
           <div className="lane-header" onClick={this.activateLaneEdit}>
             <Editable className="lane-name" editing={lane.editing}
@@ -53,7 +84,7 @@ export default class Lane extends React.Component {
           </AltContainer>
         </div>
       </div>
-    )
+    ))
   }
   addNote = (e) => {
     e.stopPropagation();
