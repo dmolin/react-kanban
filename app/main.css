@@ -24,6 +24,10 @@ body {
     height: 100%;
 }
 
+/*-----------------------
+ * LANES
+ *----------------------*/
+
 .lanes {
     display: flex;
     flex-direction: row;
@@ -113,6 +117,10 @@ body {
         text-decoration: underline;
     }
 
+/*-----------------------
+ * NOTES
+ *----------------------*/
+
 .notes {
     padding-left: 0;
     list-style: none;
@@ -136,9 +144,15 @@ body {
         display: inline-block;
     }
 
-    .note .delete {
-        float: right;
-        __padding: 0.3em;
+.note-header {
+    padding-right: 40px;
+    position: relative;
+    }
+
+    .note-header .delete {
+        position: absolute;
+        top: -3px;
+        right: 0;
         cursor: pointer;
         visibility: hidden;
         background-color: #fdfdfd;
@@ -148,3 +162,8 @@ body {
     .note:hover .delete {
         visibility: visible;
     }
+
+    .note-header input {
+        width: 100%;
+    }
+
