@@ -7,19 +7,19 @@ import LaneStore from '../stores/LaneStore';
 export default class App extends React.Component {
   render() {
     return (
-      <div>
-        <button className="add-lane" onClick={this.addLane}>+</button>
+      <div className="container">
+        {/*<button className="add-lane" onClick={this.addLane}>+ Add new lane</button>*/}
         <AltContainer
           stores={[LaneStore]}
           inject={
             {lanes: () => LaneStore.getState().lanes}
           }>
-          <Lanes />
+          <Lanes onAddLane={this.addLane} />
         </AltContainer>
       </div>
     );
   }
   addLane() {
-    LaneActions.create({name: 'New lane'});
+    LaneActions.create({name: 'New lane', editing: true});
   }
 }

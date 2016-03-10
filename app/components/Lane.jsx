@@ -13,14 +13,12 @@ export default class Lane extends React.Component {
     return (
       <div {...props}>
         <div className="lane-header" onClick={this.activateLaneEdit}>
-          <div className="lane-add-note">
-            <button onClick={this.addNote}>+</button>
-          </div>
           <Editable className="lane-name" editing={lane.editing}
                     value={lane.name} onEdit={this.editName} />
           <div className="lane-delete">
             <button onClick={this.deleteLane}>x</button>
           </div>
+          <button className="lane-add-note" onClick={this.addNote}>Add a card...</button>
         </div>
 
         <AltContainer
@@ -41,7 +39,7 @@ export default class Lane extends React.Component {
     e.stopPropagation();
 
     const laneId = this.props.lane.id;
-    const note = NoteActions.create({task: 'New Task'});
+    const note = NoteActions.create({task: 'New Task', editing:true});
 
     LaneActions.attachToLane({
       noteId: note.id,

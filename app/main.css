@@ -1,17 +1,90 @@
-body {
-    background: cornsilk;
-    font-family: sans-serif;
+html, body {
+    height: 100%;
+}
+body, * {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 14px;
 }
 
-.add-note {
-    background-color: #fdfdfd;
+body {
+    background: rgb(0, 121, 191);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 1em;
+}
+
+.lanes {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.5em;
+
+}
+
+.lane {
+    width: 300px;
+    min-width: 300px;
+    margin: 0 5px;
+    padding: 1em;
+    background-color: #efefef;
     border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.lane:first-child {
+    margin-left: 0;
+}
+
+.lane:last-child {
+    margin-right: 0;
+}
+
+.lane-header {
+    position: relative;
+}
+
+.lane-name {
+    text-transform: uppercase;
+    font-weight:700;
+    font-size: 1.1em;
+    padding-right: 32px;
+}
+
+.lane-delete {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.add-lane {
+    border: none;
+    color: #eee;
+    background: rgba(0,0,0, 0.3);
+    padding: 0.5em;
+    height:2rem;
+    text-align: left;
+}
+
+.lane-add-note {
+    background-color: transparent;
+    border: none;
+    color: rgba(0,0,0, 0.5);
+    padding: 0.5em 0;
+    width:100%;
+    text-align: left;
+    outline: none;
+}
+
+.lane-add-note:hover {
+    background-color: rgba(0,0,0, 0.2);
+    color: #444;
+    text-decoration: underline;
 }
 
 .notes {
-    margin: 0.5em;
     padding-left: 0;
-    max-width: 10em;
     list-style: none;
 }
 
