@@ -1,9 +1,12 @@
 html, body {
     height: 100%;
+    padding: 0;
+    margin: 0;
 }
 body, * {
     font-family: 'Helvetica Neue', sans-serif;
     font-size: 14px;
+    box-sizing: border-box;
 }
 
 body {
@@ -12,32 +15,44 @@ body {
     padding: 0;
 }
 
+#app {
+    height: 100%;
+}
+
 .container {
     padding: 1em;
+    height: 100%;
 }
 
 .lanes {
     display: flex;
     flex-direction: row;
-    margin-top: 0.5em;
-
+    height:100%;
 }
 
 .lane {
+    margin: 0 5px;
+    max-height:100%;
+    position: relative;
+}
+
+.lane-content {
+    display: flex;
+    max-height:100%;
+    flex-direction: column;
     width: 300px;
     min-width: 300px;
-    margin: 0 5px;
-    padding: 1em;
+    padding: 1em 0.5em 1em 1em;
     background-color: #efefef;
     border: 1px solid #ccc;
     border-radius: 3px;
     }
 
-    .lane:first-child {
+    .lane-content:first-child {
         margin-left: 0;
     }
 
-    .lane:last-child {
+    .lane-content:last-child {
         margin-right: 0;
     }
 
@@ -72,7 +87,7 @@ body {
     color: #eee;
     background: rgba(0,0,0, 0.3);
     padding: 0.5em;
-    height:1.1rem;
+    height:2rem;
     text-align: left;
     }
 
@@ -101,6 +116,9 @@ body {
 .notes {
     padding-left: 0;
     list-style: none;
+    overflow-y: overlay;
+    min-height:0;
+    padding-right: 18px;
 }
 
 .note {

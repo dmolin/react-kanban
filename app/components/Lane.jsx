@@ -12,24 +12,26 @@ export default class Lane extends React.Component {
 
     return (
       <div {...props}>
-        <div className="lane-header" onClick={this.activateLaneEdit}>
-          <Editable className="lane-name" editing={lane.editing}
-                    value={lane.name} onEdit={this.editName} />
-          <a className="lane-delete" href="#" onClick={this.deleteLane}>x</a>
-          <a className="lane-add-note" onClick={this.addNote}>Add a card...</a>
-        </div>
+        <div className="lane-content">
+          <div className="lane-header" onClick={this.activateLaneEdit}>
+            <Editable className="lane-name" editing={lane.editing}
+                      value={lane.name} onEdit={this.editName} />
+            <a className="lane-delete" href="#" onClick={this.deleteLane}>x</a>
+            <a className="lane-add-note" onClick={this.addNote}>Add a card...</a>
+          </div>
 
-        <AltContainer
-          stores={[NoteStore]}
-          inject={
-            {notes: () => NoteStore.getNotesByIds(lane.notes) || []}
-          }
-        >
-          <Notes
-            onValueClick={this.activateNoteEdit}
-            onEdit={this.editNote}
-            onDelete={this.deleteNote} />
-        </AltContainer>
+          <AltContainer
+            stores={[NoteStore]}
+            inject={
+              {notes: () => NoteStore.getNotesByIds(lane.notes) || []}
+            }
+          >
+            <Notes
+              onValueClick={this.activateNoteEdit}
+              onEdit={this.editNote}
+              onDelete={this.deleteNote} />
+          </AltContainer>
+        </div>
       </div>
     )
   }

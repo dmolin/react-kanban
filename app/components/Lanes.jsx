@@ -10,7 +10,7 @@ export default class Lanes extends React.Component {
         {lanes.map(lane =>
           <Lane className="lane" key={lane.id} lane={lane} />
         )}
-        <a className="lane add-lane" onClick={this.props.onAddLane}>Add a new lane...</a>
+        <a className="lane lane-content add-lane" onClick={this.props.onAddLane}>Add a new lane...</a>
       </div>
     )
   }
