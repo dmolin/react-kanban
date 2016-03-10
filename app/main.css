@@ -71,7 +71,7 @@ body {
     cursor: pointer;
     position: absolute;
     right: 0;
-    top: 0;
+    top: -5px;
     text-decoration: none;
     border: 1px solid #ddd;
     padding: 0.2em 0.5em;
@@ -101,14 +101,14 @@ body {
     background-color: transparent;
     border: none;
     color: rgba(0,0,0, 0.5);
-    padding: 0.5em 0;
-    width:100%;
+    margin: 0 -1em;
+    padding: 0.5em 1em;
     text-align: left;
     outline: none;
     }
 
     .lane-add-note:hover {
-        background-color: rgba(0,0,0, 0.2);
+        background-color: rgba(0,0,0, 0.1);
         color: #444;
         text-decoration: underline;
     }
