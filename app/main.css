@@ -31,19 +31,19 @@ body {
     background-color: #efefef;
     border: 1px solid #ccc;
     border-radius: 3px;
-}
+    }
 
-.lane:first-child {
-    margin-left: 0;
-}
+    .lane:first-child {
+        margin-left: 0;
+    }
 
-.lane:last-child {
-    margin-right: 0;
-}
+    .lane:last-child {
+        margin-right: 0;
+    }
 
-.lane-header {
-    position: relative;
-}
+    .lane-header {
+        position: relative;
+    }
 
 .lane-name {
     text-transform: uppercase;
@@ -53,21 +53,36 @@ body {
 }
 
 .lane-delete {
+    cursor: pointer;
     position: absolute;
     right: 0;
     top: 0;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    padding: 0.2em 0.5em;
+    background-color: #fff;
+    color: #333;
+    border-radius:50%;
 }
 
 .add-lane {
+    cursor: pointer;
+    display: block;
     border: none;
     color: #eee;
     background: rgba(0,0,0, 0.3);
     padding: 0.5em;
-    height:2rem;
+    height:1.1rem;
     text-align: left;
-}
+    }
+
+    .add-lane:hover {
+        text-decoration: underline;
+    }
 
 .lane-add-note {
+    display: block;
+    cursor: pointer;
     background-color: transparent;
     border: none;
     color: rgba(0,0,0, 0.5);
@@ -75,13 +90,13 @@ body {
     width:100%;
     text-align: left;
     outline: none;
-}
+    }
 
-.lane-add-note:hover {
-    background-color: rgba(0,0,0, 0.2);
-    color: #444;
-    text-decoration: underline;
-}
+    .lane-add-note:hover {
+        background-color: rgba(0,0,0, 0.2);
+        color: #444;
+        text-decoration: underline;
+    }
 
 .notes {
     padding-left: 0;
@@ -93,25 +108,25 @@ body {
     padding: 0.5em;
     background-color: #fdfdfd;
     box-shadow: 0 0 0.3em 0.03em rgba(0,0,0, 0.3);
-}
+    }
 
-.note:hover {
-    box-shadow: 0 0 0.3em 0.03em rgba(0,0,0, 0.7);
-}
+    .note:hover {
+        box-shadow: 0 0 0.3em 0.03em rgba(0,0,0, 0.7);
+    }
 
-.note .value {
-    display: inline-block;
-}
+    .note .value {
+        display: inline-block;
+    }
 
-.note .delete {
-    float: right;
-    __padding: 0.3em;
-    cursor: pointer;
-    visibility: hidden;
-    background-color: #fdfdfd;
-    border: 1px solid #ccc;
-}
+    .note .delete {
+        float: right;
+        __padding: 0.3em;
+        cursor: pointer;
+        visibility: hidden;
+        background-color: #fdfdfd;
+        border: 1px solid #ccc;
+    }
 
-.note:hover .delete {
-    visibility: visible;
-}
+    .note:hover .delete {
+        visibility: visible;
+    }
