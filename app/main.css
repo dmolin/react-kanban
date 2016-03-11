@@ -15,14 +15,41 @@ body {
     padding: 0;
 }
 
-#app {
+h1,h2,h3,h4,h5, .title {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#app, .app {
     height: 100%;
 }
 
 .container {
-    padding: 1em;
-    height: 100%;
+    position: absolute;
+    top: 45px;
+    bottom: 0;
+    width: 100%;
+    padding: 0 1em;
 }
+
+/*-----------------------
+ * HEADER
+ *----------------------*/
+.topbar {
+    height: 40px;
+    background-color: #026aa7;
+    display: flex;
+    align-items: center;
+    color: #eee;
+    padding: 5px 0;
+}
+
+.topbar-title {
+    font-size: 1.5rem;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+}
+
 
 /*-----------------------
  * LANES
@@ -31,7 +58,7 @@ body {
 .lanes {
     display: flex;
     flex-direction: row;
-    height:100%;
+    height: 100%;
 }
 
 .lane {
@@ -44,8 +71,8 @@ body {
     display: flex;
     max-height:100%;
     flex-direction: column;
-    width: 300px;
-    min-width: 300px;
+    width: 270px;
+    min-width: 270px;
     padding: 1em 0.5em 1em 1em;
     background-color: #efefef;
     border: 1px solid #ccc;

@@ -31,7 +31,8 @@ const noteTarget = {
 @DropTarget(ItemTypes.NOTE, noteTarget, (connect) => ({connectDropTarget: connect.dropTarget()}))
 export default class Note extends React.Component {
   render() {
-    const {connectDragSource, isDragging, connectDropTarget, id, onMove, ...props} = this.props;
+    const {connectDragSource, isDragging, connectDropTarget, id, onMove, editing, ...props} = this.props;
+    const dragSource = editing ? a => a : connectDragSource;
 
     return connectDragSource(connectDropTarget(
       <li
