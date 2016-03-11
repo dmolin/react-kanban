@@ -17,41 +17,38 @@ const laneSource = {
   }
 };
 
-const noteTarget = {
+const dropTargetSpec = {
   hover(targetProps, monitor) {
-    const sourceProps = monitor.getItem();
-    const sourceId = sourceProps.id;
-
-    if(!targetProps.lane.notes.length) {
-      LaneActions.attachToLane({
-        laneId: targetProps.lane.id,
-        noteId: sourceId
-      });
-    }
-  }
-};
-
-const laneTarget = {
-  hover(targetProps, monitor) {
+    const type = monitor.getItemType();
     const sourceProps = monitor.getItem();
     const sourceId = sourceProps.id;
     const targetId = targetProps.id;
 
-    console.log("lane target", sourceId, targetId);
-
-    if(sourceId !== targetId) {
-      LaneActions.moveLane({sourceId, targetId});
+    //console.log("lane target", sourceId, targetId);
+    switch(type) {
+      case ItemTypes.NOTE:
+        if(!targetProps.lane.notes.length) {
+          console.log("receiving note");
+          LaneActions.attachToLane({
+            laneId: targetProps.lane.id,
+            noteId: sourceId
+          });
+        }
+        break;
+      case ItemTypes.LANE:
+        if(sourceId !== targetId) {
+          LaneActions.moveLane({sourceId, targetId});
+        }
+        break;
+      default:
+        console.log("Unknown item type on hover", type);
     }
-
   }
 };
 
 @DragSource(ItemTypes.LANE, laneSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),isDragging: monitor.isDragging() }))
-@DropTarget(ItemTypes.NOTE, noteTarget, (connect) => ({
-  connectDropTarget: connect.dropTarget()
-}))
-@DropTarget(ItemTypes.LANE, laneTarget, (connect) => ({
+@DropTarget([ItemTypes.NOTE, ItemTypes.LANE], dropTargetSpec, (connect) => ({
   connectDropTarget: connect.dropTarget()
 }))
 export default class Lane extends React.Component {
