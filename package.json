@@ -18,6 +18,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-survivejs-kanban": "^0.3.3",
+    "clean-webpack-plugin": "^0.1.8",
     "css-loader": "^0.23.1",
     "html-webpack-plugin": "^2.10.0",
     "html-webpack-template": "^4.0.0",
