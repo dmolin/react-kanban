@@ -4,20 +4,23 @@ const webpack   = require('webpack');
 const NpmInstallPlugin = require('npm-install-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const pkg = require('./package.json');
 
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
   app: path.join(__dirname, 'app'),
-  build: path.join(__dirname, 'build')
+  build: path.join(__dirname, 'build'),
+  style: path.join(__dirname, 'app/main.css')
 };
 
 process.env.BABEL_ENV = TARGET;
 
 const common = {
   entry: {
-    app: PATHS.app
+    app: PATHS.app,
+    style: PATHS.style
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
@@ -29,12 +32,6 @@ const common = {
   module: {
     //loaders are evaluated from right to left and from bottom-up
     loaders: [
-      {
-        test: /\.css$/,
-        loaders: ['style', 'css'],
-        //include accepts either a path or an array of paths
-        include: PATHS.app
-      },
       {
         test: /\.jsx?$/,
         loaders: ['babel?cacheDirectory'],
@@ -72,6 +69,16 @@ if(TARGET === 'start' || !TARGET) {
       host: process.env.HOST,
       port: process.env.PORT
     },
+    module: {
+      loaders: [
+        {
+          test: /\.css$/,
+          loaders: ['style', 'css'],
+          //include accepts either a path or an array of paths
+          include: PATHS.app
+        }
+      ]
+    },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
       new NpmInstallPlugin({
@@ -81,7 +88,7 @@ if(TARGET === 'start' || !TARGET) {
   });
 }
 
-if(TARGET === 'build') {
+if(TARGET === 'build' || TARGET === 'stats') {
   module.exports = merge(common,{
     //define vendor entry point
     entry: {
@@ -95,8 +102,19 @@ if(TARGET === 'build') {
       filename: '[name].[chunkhash].js',
       chunkFilename: '[chunkhash].js'
     },
+    module: {
+      loaders: [
+        //extract CSS during build
+        {
+          test: /\.css$/,
+          loader: ExtractTextPlugin.extract('style', 'css'),
+          include: PATHS.app
+        }
+      ]
+    },
     plugins: [
       new CleanPlugin([PATHS.build]),
+      new ExtractTextPlugin('[name].[chunkhash].css'),
       //extract vendor and manifest files
       new webpack.optimize.CommonsChunkPlugin({
         names: ['vendor', 'manifest']
