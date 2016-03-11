@@ -25,6 +25,7 @@ h1,h2,h3,h4,h5, .title {
 
 .container {
     position: absolute;
+    overflow-x: auto;
     top: 45px;
     bottom: 0;
     width: 100%;
